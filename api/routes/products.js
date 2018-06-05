@@ -73,7 +73,7 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
         name: req.body.name,
         price: req.body.price,
         availability: req.body.availability,        
-        // productImage: req.file.path,
+        productImage: req.file.path,
     })
 
     product.save()
@@ -113,7 +113,8 @@ router.delete('/:productId', checkAuth, (req, res, next) => {
 router.patch('/:productId', (req, res, next) => {
     const id = req.params.productId;
     const updateOps = {};
-
+    console.log(req.body);
+    
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
