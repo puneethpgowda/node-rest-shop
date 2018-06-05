@@ -14,7 +14,7 @@ A back-end server created using Node, Express and MongoDB
 
 /products/:productId { GET }
 
-/products/ { POST } Creates a product using Name, price, productImage(opt) 
+/products/ { POST } Creates a product using Name, price, productImage(opt), availability 
 
 /products/:productId { DELETE } Deletes a product using productId
 
