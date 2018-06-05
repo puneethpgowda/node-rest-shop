@@ -12,6 +12,10 @@ const productSchema = mongoose.Schema({
     },
     productImage: {
         type: String
+    },
+    availability:{
+        type: Number,
+        required: true
     }
 });
 

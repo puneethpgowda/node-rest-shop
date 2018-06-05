@@ -22,11 +22,9 @@ router.get('/', (req, res, next) => {
 
     Product.find()
         .exec()
-        .then(docs => {
-            console.log(docs);
-            res.status(200).json({
-                docs
-            });
+        .then(result => {
+            console.log(result);
+            res.status(200).json(result);
         })
         .catch(err => {
             console.error(err);
@@ -44,7 +42,7 @@ router.get('/:productId', (req, res, next) => {
         .then(doc => {
             console.log(doc);
             if (doc) {
-                res.status(200).json({ doc })
+                res.status(200).json(doc)
 
             } else {
                 res.status(200).json({
@@ -67,22 +65,21 @@ router.get('/:productId', (req, res, next) => {
 });
 
 
-router.post('/', checkAuth, upload.single('productImage'), (req, res, next) => {
+router.post('/', upload.single('productImage'), (req, res, next) => {
     console.log(req.file);
 
     const product = new Product({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price,
-        productImage: req.file.path
+        availability: req.body.availability,        
+        // productImage: req.file.path,
     })
 
     product.save()
         .then(result => {
             console.log(result);
-            res.status(200).json({
-                result
-            })
+            res.status(200).json(result)
         })
         .catch(err => {
             console.error(err);
@@ -100,9 +97,9 @@ router.delete('/:productId', checkAuth, (req, res, next) => {
     Product.remove({ _id: id })
         .exec()
         .then(result => {
-            res.status(200).json({
+            res.status(200).json(
                 result
-            })
+            )
         })
         .catch(err => {
             res.status(500).json({
