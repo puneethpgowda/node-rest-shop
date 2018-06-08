@@ -10,7 +10,7 @@ const userRoutes = require('./api/routes/users');
 const dbConfig = require('./config/dbconfig');
 
 mongoose.connect(dbConfig.url)
-    .then(()=>{
+    .then(() => {
         console.log("Database Connected");
     })
     .catch(() => {
@@ -25,10 +25,12 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', '*');
 
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH');
+        res.header('Access-Control-Allow-Headers', 'Authorization');    
+
         return res.status(200).json({});
     }
     next();
